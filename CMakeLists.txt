@@ -17,4 +17,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 add_executable(LinkedLists
   main.cpp
 )
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/stack.h)
+
 target_link_libraries(LinkedLists Qt${QT_VERSION_MAJOR}::Core)
