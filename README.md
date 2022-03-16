@@ -1,4 +1,4 @@
 # Data structures
-Linked lists
-Stack
+Linkedlists,
+Stack,
 Queue
