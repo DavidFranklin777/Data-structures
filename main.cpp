@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack.h>
 
 using namespace std;
 
@@ -49,6 +50,23 @@ public:
     void removeFirstElement();
     void removeLastElement();
     void removeAt(int pos);
+    void insertAt(int pos, int data);
+    void reverseLinkedList();
+
+    ~LinkedLists()
+    {
+        Node *deleter;
+        int i = 1;
+        while (header!= NULL)
+        {
+            deleter = header;
+            header = header->next;
+            cout << "deleting the node num " << i << " of data = " << deleter->data << endl;
+            delete deleter;
+            size--;
+            i++;
+        }
+    }
 };
 
 int LinkedLists::getSize()
@@ -183,6 +201,72 @@ void LinkedLists::appendData(int data)
         size--;
     }
  }
+
+ void LinkedLists::insertAt(int pos, int data)
+ {
+     // Check if position is valid
+     if (pos > size+1 || pos < 1)
+     {
+         cout << "Invalid position! Cannot insert node\n";
+     }
+
+     // If position is 1, insert at the beginning
+     else if (pos == 1)
+     {
+         prependData(data);
+     }
+
+     else if (pos == size+1)
+     {
+         appendData(data);
+     }
+
+     else if (NULL != header)
+     {
+         Node *n = new Node(data);
+         Node *prev;
+         Node *cur = header;
+         for (int i=1; i<pos; i++)
+         {
+             prev = cur;
+             cur = cur->next;
+         }
+         prev->next = n;
+         n->next = cur;
+         size++;
+     }
+
+ }
+
+ void LinkedLists::reverseLinkedList()
+ {
+     if(header == NULL)
+     {
+         cout << "NULL header" << endl;
+     }
+
+     else if (header == tail)
+     {
+         cout << "Single element, nothing to reverse\n";
+     }
+
+     else
+     {
+         Node* prev = NULL;
+         Node* next = NULL;
+         Node* cur  = header;
+               tail = header;
+         while(cur!= NULL)
+         {
+             next = cur->next;
+             cur->next = prev;
+             prev = cur;
+             cur = next;
+         }
+         header = prev;
+     }
+ }
+
 int main()
 {
     LinkedLists list;
@@ -190,11 +274,27 @@ int main()
     list.appendData(2);
     list.appendData(3);
     list.appendData(4);
-    list.prependData(10);
-//    list.removeFirstElement();
-//    list.removeLastElement();
-    list.removeAt(2);
+////    list.prependData(10);
+////    list.removeFirstElement();
+////    list.removeLastElement();
+////    list.removeAt(2);
+//    list.insertAt(2, 55);
     list.printList();
+    cout << "reversing " << endl;
+    list.reverseLinkedList();
+    list.printList();
+
+//    Stack st(5);
+//    st.push(1);
+//    st.push(2);
+//    st.printStack();
+//    st.pop();
+//    st.printStack();
+//    st.pop();
+//    st.printStack();
+//    st.pop();
+
+
 
 
     return 0;
