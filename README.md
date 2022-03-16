@@ -1,2 +1,4 @@
-# LinkedLists
-Linked lists for beginners
+# Data structures
+Linked lists
+Stack
+Queue
